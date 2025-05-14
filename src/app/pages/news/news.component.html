@@ -1,0 +1,66 @@
+<!-- Header Section -->
+<section class="news-header py-5">
+  <div class="container">
+    <h1 class="display-4 mb-3">Latest News</h1>
+    <p class="lead text-muted">Stay updated with the latest trends and developments in technology</p>
+  </div>
+</section>
+
+<!-- Filters Section -->
+<section class="news-filters py-4">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="btn-group">
+          <button class="btn btn-outline-primary" [class.active]="currentCategory === 'all'" (click)="filterByCategory('all')">All</button>
+          <button class="btn btn-outline-primary" [class.active]="currentCategory === 'tech'" (click)="filterByCategory('tech')">Tech</button>
+          <button class="btn btn-outline-primary" [class.active]="currentCategory === 'web'" (click)="filterByCategory('web')">Web</button>
+          <button class="btn btn-outline-primary" [class.active]="currentCategory === 'mobile'" (click)="filterByCategory('mobile')">Mobile</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="search-box">
+          <input type="text" class="form-control" placeholder="Search articles..." [(ngModel)]="searchTerm" (input)="onSearch()">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Articles Grid -->
+<section class="news-grid py-5">
+  <div class="container">
+    <!-- Loading Spinner -->
+    <div class="text-center my-5" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="text-center my-5" *ngIf="!loading && filteredArticles.length === 0">
+      <h3>No articles found</h3>
+      <p class="text-muted">Try adjusting your search or filter criteria</p>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="row g-4" *ngIf="!loading && filteredArticles.length > 0">
+      <div class="col-md-6 col-lg-4" *ngFor="let article of filteredArticles">
+        <app-article-card
+          [id]="article.id"
+          [title]="article.title"
+          [summary]="article.summary"
+          [image]="article.image"
+          [category]="article.category"
+          [readTime]="article.readTime"
+          [author]="article.author">
+        </app-article-card>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-5" *ngIf="!loading && hasMore">
+      <button class="btn btn-primary" (click)="loadMore()">Load More Articles</button>
+    </div>
+  </div>
+</section>

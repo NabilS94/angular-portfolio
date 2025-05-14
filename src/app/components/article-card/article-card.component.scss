@@ -1,0 +1,89 @@
+.image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.category-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+      height: 2.8em; // 2 lines * 1.4 line-height
+    }
+
+    .card-text {
+      color: #6c757d;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      height: 4.5em; // 3 lines * 1.5 line-height
+    }
+  }
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .author-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-name {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+}
+
+.btn-outline-primary {
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+  }
+} 

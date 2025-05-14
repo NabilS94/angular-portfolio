@@ -1,0 +1,20 @@
+<div class="card h-100">
+  <div class="image-container">
+    <img [src]="image" [alt]="title" (error)="handleImageError($event)">
+    <div class="category-badge">
+      <span class="badge bg-primary">{{ category }}</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <p class="card-text">{{ summary }}</p>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="author-info">
+        <img [src]="author.avatar" [alt]="author.name" class="author-avatar">
+        <span class="author-name">{{ author.name }}</span>
+      </div>
+      <span class="text-muted">{{ readTime }} min read</span>
+    </div>
+    <a [routerLink]="['/news', id]" class="btn btn-outline-primary w-100 mt-3">Read More</a>
+  </div>
+</div> 

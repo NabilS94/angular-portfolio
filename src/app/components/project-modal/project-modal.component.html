@@ -1,0 +1,67 @@
+<div class="modal fade show" 
+     [class.d-block]="project" 
+     tabindex="-1" 
+     role="dialog"
+     (click)="onClose()">
+  <div class="modal-dialog modal-lg modal-dialog-centered" 
+       role="document"
+       (click)="stopPropagation($event)">
+    <div class="modal-content" *ngIf="project">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ project.title }}</h5>
+        <button type="button" 
+                class="btn-close" 
+                (click)="onClose()"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img [src]="project.image" 
+             class="img-fluid rounded mb-4" 
+             [alt]="project.title">
+        <p class="lead">{{ project.longDescription }}</p>
+        
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <h6>Fonctionnalités principales</h6>
+            <ul class="list-unstyled">
+              <li *ngFor="let feature of project.features">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>{{ feature }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6>Défis techniques</h6>
+            <ul class="list-unstyled">
+              <li *ngFor="let challenge of project.challenges">
+                <i class="bi bi-lightning-fill text-warning me-2"></i>{{ challenge }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h6>Technologies utilisées</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-primary" *ngFor="let tech of project.technologies">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a [href]="project.demoUrl" 
+           class="btn btn-primary" 
+           target="_blank">Voir la démo</a>
+        <a [href]="project.githubUrl" 
+           class="btn btn-secondary" 
+           target="_blank">Voir le code</a>
+        <button type="button" 
+                class="btn btn-outline-secondary" 
+                (click)="onClose()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop fade show" *ngIf="project"></div>

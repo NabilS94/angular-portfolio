@@ -1,0 +1,30 @@
+<div class="card h-100" (click)="onCardClick()">
+  <div class="image-container">
+    <div class="image-loading" *ngIf="!imageLoading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+    <img [src]="project.image" 
+         class="card-img-top" 
+         [alt]="project.title"
+         (load)="onImageLoad()">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ project.title }}</h5>
+    <p class="card-text">{{ project.description }}</p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="btn-group">
+        <a [href]="project.demoUrl" 
+           class="btn btn-sm btn-outline-primary" 
+           target="_blank"
+           (click)="stopPropagation($event)">Démo</a>
+        <a [href]="project.githubUrl" 
+           class="btn btn-sm btn-outline-secondary" 
+           target="_blank"
+           (click)="stopPropagation($event)">GitHub</a>
+      </div>
+      <small class="text-muted">{{ project.technologies.join(', ') }}</small>
+    </div>
+  </div>
+</div> 

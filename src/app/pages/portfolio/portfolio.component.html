@@ -1,0 +1,64 @@
+<!-- Portfolio Header -->
+<section class="portfolio-header py-5 bg-light">
+  <div class="container">
+    <h1 class="text-center mb-4">Mes Projets</h1>
+    <p class="text-center lead">Découvrez une sélection de mes réalisations en développement web et mobile</p>
+  </div>
+</section>
+
+<!-- Portfolio Filters and Sort -->
+<section class="portfolio-filters py-4">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <div class="btn-group d-flex justify-content-center" role="group">
+          <button type="button" 
+                  class="btn btn-outline-primary" 
+                  *ngFor="let filter of filters"
+                  [class.active]="currentFilter === filter.id"
+                  (click)="filterProjects(filter.id)">{{filter.label}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="sortBy" (change)="sortProjects(sortBy)">
+          <option value="newest">Plus récents</option>
+          <option value="oldest">Plus anciens</option>
+          <option value="name">Nom (A-Z)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-grid py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" *ngFor="let project of filteredProjects">
+        <app-project-card
+          [project]="project"
+          [imageLoading]="imageLoading[project.title]"
+          (imageLoaded)="onImageLoad($event)"
+          (projectClick)="openProjectDetails($event)">
+        </app-project-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Modal -->
+<app-project-modal
+  [project]="selectedProject"
+  (close)="closeProjectDetails()">
+</app-project-modal>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h2 class="mb-4">Vous avez un projet en tête ?</h2>
+    <p class="lead mb-4">Je suis toujours ouvert à de nouvelles opportunités de collaboration.</p>
+    <a routerLink="/contact" class="btn btn-light btn-lg">Discutons-en</a>
+  </div>
+</section>

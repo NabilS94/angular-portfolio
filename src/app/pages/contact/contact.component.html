@@ -1,0 +1,126 @@
+<!-- Contact Header -->
+<section class="contact-header py-5 bg-light">
+  <div class="container">
+    <h1 class="text-center mb-4">Contactez-moi</h1>
+    <p class="text-center lead">N'hésitez pas à me contacter pour discuter de vos projets</p>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+              <!-- Name Field -->
+              <div class="mb-4">
+                <label for="name" class="form-label">Nom complet</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="name" 
+                  formControlName="name"
+                  [ngClass]="{'is-invalid': submitted && f['name'].errors}"
+                  placeholder="Votre nom">
+                <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+                  <div *ngIf="f['name'].errors['required']">Le nom est requis</div>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="mb-4">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  formControlName="email"
+                  [ngClass]="{'is-invalid': submitted && f['email'].errors}"
+                  placeholder="votre@email.com">
+                <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
+                  <div *ngIf="f['email'].errors['required']">L'email est requis</div>
+                  <div *ngIf="f['email'].errors['email']">Format d'email invalide</div>
+                </div>
+              </div>
+
+              <!-- Subject Field -->
+              <div class="mb-4">
+                <label for="subject" class="form-label">Sujet</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="subject" 
+                  formControlName="subject"
+                  [ngClass]="{'is-invalid': submitted && f['subject'].errors}"
+                  placeholder="Sujet de votre message">
+                <div class="invalid-feedback" *ngIf="submitted && f['subject'].errors">
+                  <div *ngIf="f['subject'].errors['required']">Le sujet est requis</div>
+                </div>
+              </div>
+
+              <!-- Message Field -->
+              <div class="mb-4">
+                <label for="message" class="form-label">Message</label>
+                <textarea 
+                  class="form-control" 
+                  id="message" 
+                  rows="5" 
+                  formControlName="message"
+                  [ngClass]="{'is-invalid': submitted && f['message'].errors}"
+                  placeholder="Votre message..."></textarea>
+                <div class="invalid-feedback" *ngIf="submitted && f['message'].errors">
+                  <div *ngIf="f['message'].errors['required']">Le message est requis</div>
+                  <div *ngIf="f['message'].errors['minlength']">Le message doit contenir au moins 10 caractères</div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary btn-lg"
+                  [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  {{ loading ? 'Envoi en cours...' : 'Envoyer le message' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="contact-info py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4" *ngFor="let info of contactInfo">
+        <app-card
+          [icon]="info.icon"
+          [title]="info.title"
+          [content]="info.content">
+        </app-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Alert -->
+<div class="alert alert-success alert-dismissible fade show translate-middle-x" 
+     role="alert" 
+     *ngIf="success">
+  Votre message a été envoyé avec succès !
+  <button type="button" class="btn-close" (click)="success = false" aria-label="Close"></button>
+</div>
+
+<!-- Error Alert -->
+<div class="alert alert-danger alert-dismissible fade show translate-middle-x" 
+     role="alert" 
+     *ngIf="error">
+  Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.
+  <button type="button" class="btn-close" (click)="error = false" aria-label="Close"></button>
+</div>
